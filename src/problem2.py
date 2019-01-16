@@ -3,8 +3,8 @@ Exam 2, problem 2.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Jack Wilson.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import math
 import time
@@ -92,7 +92,7 @@ def main():
     # run_test_bigger_triangle()
     # run_test_shrink_or_expand()
     # run_test_return_doubled_triangle()
-    # run_test_get_largest_area()
+    run_test_get_largest_area()
 
 
 ###############################################################################
@@ -137,8 +137,12 @@ class Triangle(object):
           :type b: Point
           :type c: Point
         """
+        self.a = a.clone()
+        self.b = b.clone()
+        self.c = c.clone()
+        self.largest_area = self.area()
         # ---------------------------------------------------------------------
-        # TODO: 2.
+        # DONE: 2.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -177,8 +181,13 @@ class Triangle(object):
         Type hints:
           :rtype: float
         """
+        l1 = ((self.a.x - self.b.x) ** 2 + (self.a.y - self.b.y) ** 2) ** 0.5
+        l2 = ((self.c.x - self.b.x) ** 2 + (self.c.y - self.b.y) ** 2) ** 0.5
+        l3 = ((self.c.x - self.a.x) ** 2 + (self.c.y - self.a.y) ** 2) ** 0.5
+        s = (l1 + l2 + l3) / 2
+        return (s * (s - l1) * (s - l2) * (s - l3)) ** 0.5
         # ---------------------------------------------------------------------
-        # TODO: 3.
+        # DONE: 3.
         #   a. READ the above specification, including the Example AND HINT!
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -200,8 +209,12 @@ class Triangle(object):
           :type: triangle2: Triangle
           :rtype: bool
         """
+        if self.area() > triangle2.area():
+            return True
+        else:
+            return False
         # ---------------------------------------------------------------------
-        # TODO 4:
+        # DONE 4:
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -223,8 +236,17 @@ class Triangle(object):
          Type hints:
            :type: f: float
         """
+        self.a.x *= f
+        self.b.x *= f
+        self.c.x *= f
+        self.a.y *= f
+        self.b.y *= f
+        self.c.y *= f
+        if self.area() > self.largest_area:
+            self.largest_area = self.area()
+        return self
         # ---------------------------------------------------------------------
-        # TODO 8:
+        # DONE 8:
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -246,8 +268,9 @@ class Triangle(object):
         Type hints:
           :rtype: Triangle:
         """
+        return self.shrink_or_expand(2)
         # -------------------------------------------------------------------------
-        # TODO: 9
+        # DONE: 9
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -270,8 +293,9 @@ class Triangle(object):
         Type hints:
           :rtype: Float:
         """
+        return self.largest_area
         # ---------------------------------------------------------------------
-        # TODO: 9
+        # DONE: 9
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
